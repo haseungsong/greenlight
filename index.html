@@ -39,9 +39,17 @@
 <body class="bg-dark text-white">
 
 <!-- Header -->
+<!-- ✅ 반응형 Header 전체 코드 -->
 <header class="fixed top-0 left-0 right-0 bg-black/70 backdrop-blur z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-extrabold text-primary">🎳 GREENLIGHT</h1>
+
+    <!-- 햄버거 버튼 (모바일) -->
+    <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
+      ☰
+    </button>
+
+    <!-- 데스크탑 메뉴 -->
     <nav class="hidden md:flex gap-6 text-sm">
       <a href="#home" class="hover:text-primary transition">홈</a>
       <a href="#menu" class="hover:text-primary transition">메뉴</a>
@@ -50,11 +58,38 @@
       <a href="#location" class="hover:text-primary transition">오시는 길</a>
       <a href="#contact" class="hover:text-primary transition">문의</a>
     </nav>
-    <a href="https://forms.gle/your-google-form" target="_blank" class="ml-4 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-lime-400 transition">
+
+    <a href="https://forms.gle/your-google-form" target="_blank"
+       class="ml-4 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-lime-400 transition text-sm hidden md:inline-block">
       예약하기
     </a>
   </div>
+
+  <!-- 모바일 메뉴 토글 영역 -->
+  <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
+    <nav class="flex flex-col gap-3 text-sm text-white">
+      <a href="#home" class="hover:text-primary transition">홈</a>
+      <a href="#menu" class="hover:text-primary transition">메뉴</a>
+      <a href="#event" class="hover:text-primary transition">이벤트</a>
+      <a href="#facility" class="hover:text-primary transition">부대 시설</a>
+      <a href="#location" class="hover:text-primary transition">오시는 길</a>
+      <a href="#contact" class="hover:text-primary transition">문의</a>
+      <a href="https://forms.gle/your-google-form" target="_blank"
+         class="bg-primary text-black text-center font-semibold px-4 py-2 rounded-lg hover:bg-lime-400 transition">
+        예약하기
+      </a>
+    </nav>
+  </div>
 </header>
+
+<!-- ✅ 햄버거 메뉴 토글 스크립트 -->
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function () {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>
+
 
 <!-- Hero Section -->
 <section id="home" class="pt-32 pb-16 bg-cover bg-center text-center" style="background-image: url('https://static.wixstatic.com/media/8ff00d_883fd0038bb044e9bd8a5c37cc5c445e~mv2.jpg');">

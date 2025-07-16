@@ -36,6 +36,24 @@
   body { font-family: 'Pretendard Variable', sans-serif; }
   html { scroll-behavior: smooth; }
 
+  /* 모바일에서 슬라이더 이미지 자동 축소 */
+  @media (max-width: 768px) {
+    #slider .slide {
+      background-size: contain !important;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    /* 유튜브 영상 iframe도 축소 */
+    #video-hero iframe {
+      width: 100vw !important;
+      height: 100vh !important;
+      transform: none !important;
+      left: 0 !important;
+      top: 0 !important;
+      scale: 1 !important;
+    }
+  }
   #slider .slide {
     position: absolute;
     inset: 0;

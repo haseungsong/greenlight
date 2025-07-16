@@ -30,57 +30,86 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
-  </style>
+<!-- ✅ Inter → Pretendard Variable로 교체 -->
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<style>
+  body { font-family: 'Pretendard Variable', sans-serif; }
+  html { scroll-behavior: smooth; }
+</style>
 </head>
-<body class="bg-dark text-white">
+<body class="bg-white text-black">
 
-<!-- Header -->
-<!-- ✅ 반응형 Header 전체 코드 -->
-<header class="fixed top-0 left-0 right-0 bg-black/70 backdrop-blur z-50">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-extrabold text-primary">🎳 GREENLIGHT</h1>
 
-    <!-- 햄버거 버튼 (모바일) -->
-    <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
-      ☰
-    </button>
+<!-- 🎉 이벤트 배너 (페이지 진입 시 상단 팝업) -->
+<div id="event-banner" class="fixed inset-0 z-[9999] bg-black/60 flex items-center justify-center">
+  <div class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-[95%] p-10 md:p-14 text-center">
+    <button onclick="document.getElementById('event-banner').classList.add('hidden')" 
+            class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-3xl font-bold">&times;</button>
 
-    <!-- 데스크탑 메뉴 -->
-    <nav class="hidden md:flex gap-6 text-sm">
-      <a href="#home" class="hover:text-primary transition">홈</a>
-      <a href="#menu" class="hover:text-primary transition">메뉴</a>
-      <a href="#event" class="hover:text-primary transition">이벤트</a>
-      <a href="#facility" class="hover:text-primary transition">부대 시설</a>
-      <a href="#location" class="hover:text-primary transition">오시는 길</a>
-      <a href="#contact" class="hover:text-primary transition">문의</a>
+    <h2 class="text-5xl font-extrabold mb-6 text-primary drop-shadow">🎁 특별 이벤트 안내</h2>
+    <p class="text-xl mb-8 text-gray-700 leading-relaxed">
+      지금 방문하시면 <span class="font-bold text-lime-600">3게임 이용 시 대화료 무료!</span><br/>
+      학생 할인과 커플 이벤트까지 꼭 확인하세요 🎳💚
+    </p>
+    <a href="#event" 
+      onclick="document.getElementById('event-banner').classList.add('hidden')" 
+      class="inline-block mt-2 bg-lime-500 hover:bg-lime-600 text-white font-bold text-lg py-4 px-8 rounded-full transition">
+      이벤트 보러가기
+    </a>
+  </div>
+</div>
+
+
+<header class="fixed top-0 w-full z-50 bg-gray-700 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
+
+    <!-- ✅ 로고 -->
+    <div class="flex items-center space-x-3">
+      <img src="..." alt="로고" class="w-10 h-10" />
+      <span class="text-3xl font-extrabold">그린라이트</span> <!-- 글자 크게 -->
+    </div>
+
+    <!-- ✅ 메뉴 -->
+    <nav class="hidden md:flex space-x-12 text-2xl font-bold"> <!-- 여기가 핵심 -->
+      <a href="#home" class="hover:text-lime-400 transition">홈</a>
+      <a href="#price" class="hover:text-lime-400 transition">요금</a>
+      <a href="#menu" class="hover:text-lime-400 transition">메뉴</a>
+      <a href="#event" class="hover:text-lime-400 transition">이벤트</a>
+      <a href="#facility" class="hover:text-lime-400 transition">시설</a>
+      <a href="#location" class="hover:text-lime-400 transition">오시는길</a>
     </nav>
 
-    <a href="https://forms.gle/your-google-form" target="_blank"
-       class="ml-4 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-lime-400 transition text-sm hidden md:inline-block">
+    <!-- ✅ 예약 버튼 -->
+    <a href="#booking" class="bg-lime-400 text-black px-6 py-3 rounded-full text-xl font-bold shadow hover:bg-lime-500 transition">
       예약하기
     </a>
   </div>
-
-  <!-- 모바일 메뉴 토글 영역 -->
-  <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
-    <nav class="flex flex-col gap-3 text-sm text-white">
-      <a href="#home" class="hover:text-primary transition">홈</a>
-      <a href="#menu" class="hover:text-primary transition">메뉴</a>
-      <a href="#event" class="hover:text-primary transition">이벤트</a>
-      <a href="#facility" class="hover:text-primary transition">부대 시설</a>
-      <a href="#location" class="hover:text-primary transition">오시는 길</a>
-      <a href="#contact" class="hover:text-primary transition">문의</a>
-      <a href="https://forms.gle/your-google-form" target="_blank"
-         class="bg-primary text-black text-center font-semibold px-4 py-2 rounded-lg hover:bg-lime-400 transition">
-        예약하기
-      </a>
-    </nav>
-  </div>
 </header>
+
+
+<!-- 🎥 슬라이더 Hero -->
+<section id="home" class="relative h-screen w-full overflow-hidden">
+  <!-- 이미지들 -->
+  <div id="slider" class="absolute inset-0 w-full h-full">
+    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-1.jpg'); opacity: 1;"></div>
+    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-2.jpg'); opacity: 0;"></div>
+    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-3.jpg'); opacity: 0;"></div>
+  </div>
+
+  <!-- 텍스트 오버레이 -->
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+    <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg mb-6">그린라이트와 함께<br>노원을 더 알차게 즐기자!</h1>
+    <p class="text-lg md:text-xl text-gray-200 mb-6">데이트, 친구모임, 락볼링의 모든 것!</p>
+    <a href="https://forms.gle/your-google-form" class="bg-white text-black font-bold px-6 py-3 rounded-full hover:bg-gray-200 transition">
+      지금 예약하기
+    </a>
+  </div>
+
+  <!-- 어두운 오버레이 -->
+  <div class="absolute inset-0 bg-black/50 z-0"></div>
+</section>
+
+
 
 <!-- ✅ 햄버거 메뉴 토글 스크립트 -->
 <script>
@@ -90,21 +119,47 @@
   });
 </script>
 
+<!-- 🎥 Fullscreen 비디오 Hero -->
+<section id="video-hero" class="relative h-screen w-full overflow-hidden">
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="https://your-domain.com/your-video.mp4" type="video/mp4" />
+    <!-- Fallback -->
+    브라우저가 비디오 태그를 지원하지 않습니다.
+  </video>
 
-<!-- Hero Section -->
-<section id="home" class="pt-32 pb-16 bg-cover bg-center text-center" style="background-image: url('https://static.wixstatic.com/media/8ff00d_883fd0038bb044e9bd8a5c37cc5c445e~mv2.jpg');">
-  <div class="bg-black/60 py-16 px-4">
-    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">낮엔 문화공간, 밤엔 락볼링장!</h2>
-    <p class="text-lg md:text-xl text-primary mb-6">노원에서 가장 힙한 볼링 경험, 그린라이트</p>
-    <a href="https://forms.gle/your-google-form" target="_blank" class="bg-primary text-black px-6 py-3 rounded-full font-bold shadow hover:bg-lime-300 transition">
+  <!-- 텍스트/로고 오버레이 (선택) -->
+  <div class="relative z-10 flex items-center justify-center h-full text-white text-center px-4">
+    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-xl">
+      🎳 GREENLIGHT
+    </h1>
+  </div>
+
+  <!-- 어두운 오버레이 (선택) -->
+  <div class="absolute inset-0 bg-black/40 z-0"></div>
+</section>
+
+
+
+<section id="home" class="pt-32 pb-20 text-center relative overflow-hidden bg-transparent">
+
+  <!-- 본문 내용 -->
+  <div class="relative max-w-4xl mx-auto px-4 py-20 text-black">
+    <h2 class="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+      낮엔 문화공간, 밤엔 락볼링장!
+    </h2>
+    <p class="text-lg md:text-xl text-lime-600 mb-8">
+      노원에서 가장 힙한 볼링 경험, 그린라이트
+    </p>
+    <a href="https://forms.gle/your-google-form" target="_blank"
+       class="bg-lime-500 text-white px-6 py-3 rounded-full font-bold hover:bg-lime-600 transition">
       지금 예약하기
     </a>
   </div>
 
   <!-- 무제한 요금제 안내 -->
-  <div class="mt-12 max-w-3xl mx-auto bg-white text-black rounded-xl shadow-lg p-6 md:p-8">
+  <div class="relative mt-20 max-w-3xl mx-auto bg-white text-black rounded-xl shadow-lg p-6 md:p-8">
     <h3 class="text-2xl md:text-3xl font-bold text-primary mb-4">🎳 무제한 요금제 안내</h3>
-    <p class="text-base mb-4">⏰ <span class="font-semibold">적용시간:</span> 10:00 ~ 13:00 / 24:00 ~ 03:00 (주간 및 심야 요금)</p>
+    <p class="text-base mb-4">⏰ <span class="font-semibold">적용시간:</span> 10:00 ~ 13:00 / 24:00 ~ 03:00</p>
     <ul class="space-y-2 text-base">
       <li>✔ 1시간 <span class="font-bold text-primary">10,000원</span></li>
       <li>✔ 2시간 <span class="font-bold text-primary">15,000원</span></li>
@@ -112,130 +167,132 @@
     </ul>
     <p class="text-sm text-gray-600 mt-4">※ 정해진 시간 종료 시 게임도 종료됩니다<br>※ 1시간 요금제 마감시간: 주간 12:50 / 심야 01:50<br>※ 2시간 요금제 마감시간: 주간 12:00 / 심야 01:00</p>
   </div>
+
 </section>
 
-<!-- 💸 선불 게임 요금표 -->
-<section class="pt-16 pb-20 px-4 bg-gray-100 text-black">
-  <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
-    <h3 class="text-3xl font-bold text-primary mb-6 text-center">💸 선불 게임 요금표</h3>
-    
+
+
+<!-- 💸 선불 게임 요금표 (ACT 스타일) -->
+<section id="price" class="scroll-mt-12 py-24 px-6 bg-white text-black">
+  <div class="max-w-5xl mx-auto">
+    <h3 class="text-4xl font-bold text-center mb-12">💸 선불 게임 요금표</h3>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       
-      <!-- 평일 요금표 -->
-      <div>
-        <h4 class="text-xl font-semibold mb-3 text-gray-700 text-center">📅 평일 (월~금)</h4>
-        <div class="overflow-x-auto">
-          <table class="w-full table-fixed border border-gray-300 text-sm text-center">
-            <thead class="bg-gray-200 font-semibold">
-              <tr>
-                <th class="p-2">구분</th>
-                <th class="p-2">주간<br>(11:00~19:00)</th>
-                <th class="p-2">락볼링<br>(11:00~04:00)</th>
-                <th class="p-2">대화료</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-t">
-                <td class="p-2">1게임</td>
-                <td class="p-2">2,500원</td>
-                <td class="p-2">5,000원</td>
-                <td class="p-2" rowspan="4">2,000원<br><span class="text-xs">(3게임 시 무료)</span></td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-2">2게임</td>
-                <td class="p-2">4,500원</td>
-                <td class="p-2">동일</td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-2">3게임</td>
-                <td class="p-2">7,500원</td>
-                <td class="p-2">동일</td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-2">4게임</td>
-                <td class="p-2">9,000원</td>
-                <td class="p-2">동일</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <!-- 평일 요금 -->
+      <div class="bg-gray-50 rounded-xl shadow p-6">
+        <h4 class="text-xl font-semibold text-center mb-4">📅 평일 (월~금)</h4>
+        <table class="w-full table-auto text-sm text-center border border-gray-200">
+          <thead class="bg-gray-100 font-medium">
+            <tr>
+              <th class="p-2 border">구분</th>
+              <th class="p-2 border">주간<br>(11:00~19:00)</th>
+              <th class="p-2 border">락볼링<br>(11:00~04:00)</th>
+              <th class="p-2 border">대화료</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr>
+              <td class="p-2 border">1게임</td>
+              <td class="p-2 border">2,500원</td>
+              <td class="p-2 border">5,000원</td>
+              <td class="p-2 border" rowspan="4">2,000원<br><span class="text-xs text-gray-500">(3게임 시 무료)</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border">2게임</td>
+              <td class="p-2 border">4,500원</td>
+              <td class="p-2 border">동일</td>
+            </tr>
+            <tr>
+              <td class="p-2 border">3게임</td>
+              <td class="p-2 border">7,500원</td>
+              <td class="p-2 border">동일</td>
+            </tr>
+            <tr>
+              <td class="p-2 border">4게임</td>
+              <td class="p-2 border">9,000원</td>
+              <td class="p-2 border">동일</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- 주말/공휴일 요금표 -->
-      <div>
-        <h4 class="text-xl font-semibold mb-3 text-gray-700 text-center">📅 주말/공휴일</h4>
-        <div class="overflow-x-auto">
-          <table class="w-full table-fixed border border-gray-300 text-sm text-center">
-            <thead class="bg-gray-200 font-semibold">
-              <tr>
-                <th class="p-2">구분</th>
-                <th class="p-2">주간<br>(11:00~18:00)</th>
-                <th class="p-2">락볼링<br>(11:00~05:00)</th>
-                <th class="p-2">대화료</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-t">
-                <td class="p-2">학생</td>
-                <td class="p-2">3,500원</td>
-                <td class="p-2">5,000원</td>
-                <td class="p-2">2,000원<br><span class="text-xs">(3게임 시 무료)</span></td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-2">일반</td>
-                <td class="p-2">4,000원</td>
-                <td class="p-2">동일</td>
-                <td class="p-2">동일</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <!-- 주말 요금 -->
+      <div class="bg-gray-50 rounded-xl shadow p-6">
+        <h4 class="text-xl font-semibold text-center mb-4">📅 주말/공휴일</h4>
+        <table class="w-full table-auto text-sm text-center border border-gray-200">
+          <thead class="bg-gray-100 font-medium">
+            <tr>
+              <th class="p-2 border">구분</th>
+              <th class="p-2 border">주간<br>(11:00~18:00)</th>
+              <th class="p-2 border">락볼링<br>(11:00~05:00)</th>
+              <th class="p-2 border">대화료</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr>
+              <td class="p-2 border">학생</td>
+              <td class="p-2 border">3,500원</td>
+              <td class="p-2 border">5,000원</td>
+              <td class="p-2 border">2,000원<br><span class="text-xs text-gray-500">(3게임 시 무료)</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border">일반</td>
+              <td class="p-2 border">4,000원</td>
+              <td class="p-2 border">동일</td>
+              <td class="p-2 border">동일</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- 🍹 음료 메뉴 Section -->
-<section id="menu" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white">
-  <div class="max-w-4xl mx-auto text-center">
-    <h3 class="text-4xl font-extrabold mb-10">🍹 음료 메뉴</h3>
-    <p class="text-gray-300 text-lg mb-8">그린라이트 볼링장에서 판매 중인 음료입니다.</p>
-    <div class="bg-white text-black rounded-xl shadow-lg p-6 max-w-md mx-auto">
-      <ul class="text-left text-lg space-y-3">
-        <li class="flex justify-between border-b pb-2"><span>사이다</span><span>2,000원</span></li>
-        <li class="flex justify-between border-b pb-2"><span>콜라</span><span>2,000원</span></li>
-        <li class="flex justify-between border-b pb-2"><span>미란다 오렌지</span><span>2,000원</span></li>
-        <li class="flex justify-between border-b pb-2"><span>미란다 포도</span><span>2,000원</span></li>
-        <li class="flex justify-between border-b pb-2"><span>마운틴 듀</span><span>2,000원</span></li>
-        <li class="flex justify-between"><span>생수</span><span>1,000원</span></li>
+
+<!-- 🍹 음료 메뉴 Section (ACT 스타일) -->
+<section id="menu" class="scroll-mt-12 py-24 px-6 bg-white text-black">
+  <div class="max-w-3xl mx-auto text-center">
+    <h3 class="text-4xl font-bold mb-10">🍹 음료 메뉴</h3>
+    <p class="text-lg text-gray-600 mb-10">그린라이트 볼링장에서 판매 중인 음료입니다.</p>
+
+    <div class="bg-white rounded-xl shadow p-6 md:p-8 max-w-md mx-auto">
+      <ul class="text-left text-lg space-y-4">
+        <li class="flex justify-between border-b pb-2"><span>사이다</span><span class="font-medium">2,000원</span></li>
+        <li class="flex justify-between border-b pb-2"><span>콜라</span><span class="font-medium">2,000원</span></li>
+        <li class="flex justify-between border-b pb-2"><span>미란다 오렌지</span><span class="font-medium">2,000원</span></li>
+        <li class="flex justify-between border-b pb-2"><span>미란다 포도</span><span class="font-medium">2,000원</span></li>
+        <li class="flex justify-between border-b pb-2"><span>마운틴 듀</span><span class="font-medium">2,000원</span></li>
+        <li class="flex justify-between"><span>생수</span><span class="font-medium">1,000원</span></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 🎉 이벤트 Section -->
-<section id="event" class="py-20 px-6 bg-gray-900 text-white">
+
+<!-- 🎉 이벤트 Section (ACT 스타일) -->
+<section id="event" class="scroll-mt-12 py-24 px-6 bg-white text-black"">
   <div class="max-w-5xl mx-auto text-center">
-    <h3 class="text-4xl font-extrabold mb-10">🎉 진행 중인 이벤트</h3>
+    <h3 class="text-4xl font-bold mb-12">🎉 진행 중인 이벤트</h3>
 
     <!-- 그린라이트 이벤트 -->
-    <div class="bg-white text-black rounded-xl shadow-lg p-6 md:p-8 mb-12">
-      <h4 class="text-2xl font-bold mb-4 text-primary">💚 그린라이트 이벤트</h4>
-      <ul class="text-left text-lg space-y-3 list-disc list-inside">
+    <div class="bg-gray-50 rounded-xl shadow p-6 md:p-8 mb-12 text-left">
+      <h4 class="text-2xl font-semibold text-primary mb-4">💚 그린라이트 이벤트</h4>
+      <ul class="list-disc list-inside text-lg space-y-2">
         <li>그린라이트를 켜세요.</li>
         <li>마음에 드시는 분이 있다면 일단 켜세요.</li>
         <li>볼링을 배우고 싶은 분도 일단 켜세요.</li>
         <li>그린라이트가 여러분의 오작교가 되어드리겠습니다. 매너는 처음부터 끝까지 ^^</li>
         <li>커플 탄생 시 시원한 맥주 한 잔 공짜! (단, 빨대는 하나^^~~)</li>
       </ul>
-      <p class="mt-4 text-sm text-red-600">※주의사항※ 양다리를 조심하세요</p>
+      <p class="mt-4 text-sm text-red-600">※ 주의사항: 양다리를 조심하세요</p>
     </div>
 
     <!-- 학생 할인 이벤트 -->
-    <div class="bg-white text-black rounded-xl shadow-lg p-6 md:p-8">
-      <h4 class="text-2xl font-bold mb-4 text-primary">🎓 학생 할인 이벤트</h4>
-      <ul class="text-left text-lg space-y-3 list-disc list-inside">
+    <div class="bg-gray-50 rounded-xl shadow p-6 md:p-8 text-left">
+      <h4 class="text-2xl font-semibold text-primary mb-4">🎓 학생 할인 이벤트</h4>
+      <ul class="list-disc list-inside text-lg space-y-2">
         <li>중고등학생 대상</li>
         <li>평일 20시 이전 입장 시</li>
         <li>학생증 제시하면 게임비용 50% 할인</li>
@@ -244,32 +301,34 @@
   </div>
 </section>
 
+
 <!-- 🎮 부대 시설 Section -->
-<section id="facility" class="py-20 px-6 bg-black text-white">
+<section id="facility" class="scroll-mt-12 py-24 px-6 bg-white text-black"">
   <div class="max-w-6xl mx-auto">
-    <h3 class="text-4xl font-extrabold mb-12 text-center text-primary">🎮 부대 시설 안내</h3>
+    <h3 class="text-4xl font-bold text-center mb-12 text-black">🎮 부대 시설 안내</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
       <!-- 포켓볼 -->
-      <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h4 class="text-2xl font-bold mb-4">🎱 포켓볼</h4>
-        <p class="text-gray-300">포켓볼 테이블이 마련되어 있어 볼링 외에도 다양한 게임을 즐기실 수 있습니다.</p>
+      <div class="bg-white rounded-xl shadow p-6">
+        <h4 class="text-2xl font-semibold mb-4">🎱 포켓볼</h4>
+        <p class="text-gray-700">포켓볼 테이블이 마련되어 있어 볼링 외에도 다양한 게임을 즐기실 수 있습니다.</p>
       </div>
       <!-- 다트 -->
-      <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h4 class="text-2xl font-bold mb-4">🎯 다트</h4>
-        <p class="text-gray-300">다트 게임을 통해 친구들과의 경쟁을 즐겨보세요.</p>
+      <div class="bg-white rounded-xl shadow p-6">
+        <h4 class="text-2xl font-semibold mb-4">🎯 다트</h4>
+        <p class="text-gray-700">다트 게임을 통해 친구들과의 경쟁을 즐겨보세요.</p>
       </div>
       <!-- 오락기 -->
-      <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h4 class="text-2xl font-bold mb-4">🕹️ 오락기</h4>
-        <p class="text-gray-300">추억의 오락기를 통해 다양한 게임을 경험하실 수 있습니다.</p>
+      <div class="bg-white rounded-xl shadow p-6">
+        <h4 class="text-2xl font-semibold mb-4">🕹️ 오락기</h4>
+        <p class="text-gray-700">추억의 오락기를 통해 다양한 게임을 경험하실 수 있습니다.</p>
       </div>
     </div>
   </div>
 </section>
 
+
 <!-- 📍 오시는 길 Section -->
-<section id="location" class="py-20 px-6 bg-black text-white">
+<section id="location" class="scroll-mt-12 py-24 px-6 bg-white text-black"">
   <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     <!-- 지도 -->
     <div>
@@ -278,13 +337,13 @@
         src="https://map.kakao.com/link/map/그린라이트볼링장,37.654997,127.061381"
         width="100%"
         height="300"
-        class="rounded-xl border border-gray-700 shadow-md"
+        class="rounded-xl border border-gray-300 shadow"
         loading="lazy"
         allowfullscreen=""
       ></iframe>
     </div>
     <!-- 주소/영업시간 -->
-    <div class="flex flex-col justify-center space-y-4 text-sm md:text-base">
+    <div class="flex flex-col justify-center space-y-4 text-base">
       <p><span class="font-semibold text-primary">주소:</span> 서울 노원구 동일로 1414 지하 1층</p>
       <p><span class="font-semibold text-primary">영업시간:</span> 평일 12:00 ~ 01:00 / 주말 11:00 ~ 02:00</p>
       <p><span class="font-semibold text-primary">지하철:</span> 4호선 노원역 6번 출구 도보 3분</p>
@@ -292,17 +351,19 @@
   </div>
 </section>
 
+
 <!-- 📞 문의 Section -->
-<section id="contact" class="py-20 px-6 bg-gray-900 text-white">
-  <div class="max-w-4xl mx-auto text-center space-y-4">
-    <h3 class="text-3xl font-bold mb-6">📞 문의하기</h3>
-    <p><span class="font-semibold text-primary">전화:</span> <a href="tel:02-932-0708" class="hover:underline">02-932-0708</a></p>
+<section id="contact" class="scroll-mt-12 py-24 px-6 bg-white text-black"">
+  <div class="max-w-4xl mx-auto text-center space-y-6">
+    <h3 class="text-3xl font-bold">📞 문의하기</h3>
+    <p><span class="font-semibold text-primary">전화:</span> <a href="tel:02-932-0708" class="text-blue-600 underline hover:text-blue-800">02-932-0708</a></p>
     <p><span class="font-semibold text-primary">카카오채널:</span> @greenlight</p>
-    <p><span class="font-semibold text-primary">인스타그램:</span> <a href="https://www.instagram.com/greenlight_bowling" target="_blank" class="hover:underline">@greenlight_bowling</a></p>
+    <p><span class="font-semibold text-primary">인스타그램:</span> <a href="https://www.instagram.com/greenlight_bowling" target="_blank" class="text-blue-600 underline hover:text-blue-800">@greenlight_bowling</a></p>
   </div>
 </section>
 
+
 <!-- ⬇ 푸터 -->
-<footer class="bg-black text-center py-6 text-sm text-gray-400 border-t border-gray-700">
-  &copy; 2025 <span class="text-white font-semibold">그린라이트 볼링장</span> ｜ 대표 박형준 ｜ 사업자등록번호 107-10-09806
+<footer class="bg-white border-t border-gray-200 text-center py-6 text-sm text-gray-500">
+  &copy; 2025 <span class="text-black font-semibold">그린라이트 볼링장</span> ｜ 대표 박형준 ｜ 사업자등록번호 107-10-09806
 </footer>

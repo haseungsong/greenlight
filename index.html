@@ -72,6 +72,14 @@
       class="inline-block mt-2 bg-lime-500 hover:bg-lime-600 text-white font-bold text-lg py-4 px-8 rounded-full transition">
       이벤트 보러가기
     </a>
+
+    <div class="mt-4 flex justify-end">
+      <button onclick="hideBannerToday()" 
+              class="text-sm text-gray-500 underline hover:text-gray-700">
+        오늘 다시 보지 않기
+      </button>
+    </div>
+
   </div>
 </div>
 
@@ -418,4 +426,22 @@
     showSlide(current);
   }, 2000); // 2초
 
+
+   // 배너 숨기기 함수 (하루 동안)
+  function hideBannerToday() {
+    const now = new Date();
+    const expire = now.setHours(23, 59, 59, 999); // 오늘 밤 11:59:59까지
+    localStorage.setItem('hideEventBannerUntil', expire);
+    document.getElementById('event-banner').classList.add('hidden');
+  }
+
+  // 페이지 로드 시 배너 표시 여부 확인
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('hideEventBannerUntil');
+    const now = new Date().getTime();
+    if (saved && now < parseInt(saved)) {
+      document.getElementById('event-banner').classList.add('hidden');
+    }
+  });
+  
 </script>

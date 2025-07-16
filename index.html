@@ -35,10 +35,26 @@
 <style>
   body { font-family: 'Pretendard Variable', sans-serif; }
   html { scroll-behavior: smooth; }
+
+  #slider .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 5s ease;
+    transform: scale(1.1);
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  #slider .slide.active {
+    opacity: 1;
+    transform: scale(1); /* 줌인 효과 */
+    z-index: 1;
+  }
 </style>
 </head>
 <body class="bg-white text-black">
-
 
 <!-- 🎉 이벤트 배너 (페이지 진입 시 상단 팝업) -->
 <div id="event-banner" class="fixed inset-0 z-[9999] bg-black/60 flex items-center justify-center">
@@ -65,8 +81,8 @@
 
     <!-- ✅ 로고 -->
     <div class="flex items-center space-x-3">
-      <img src="..." alt="로고" class="w-10 h-10" />
-      <span class="text-3xl font-extrabold">그린라이트</span> <!-- 글자 크게 -->
+      <img src="assets/logo.png" alt="로고" class="w-14 h-14 object-contain" />
+      <span class="text-3xl font-extrabold">그린라이트</span>
     </div>
 
     <!-- ✅ 메뉴 -->
@@ -89,25 +105,36 @@
 
 <!-- 🎥 슬라이더 Hero -->
 <section id="home" class="relative h-screen w-full overflow-hidden">
-  <!-- 이미지들 -->
-  <div id="slider" class="absolute inset-0 w-full h-full">
-    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-1.jpg'); opacity: 1;"></div>
-    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-2.jpg'); opacity: 0;"></div>
-    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://your-image-3.jpg'); opacity: 0;"></div>
+<div id="slider" class="absolute inset-0 w-full h-full">
+    <div class="slide active absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+         style="background-image: url('https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/slide1.jpeg');">
+    </div>
+    <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+         style="background-image: url('https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/slide2.jpeg');">
+    </div>
+    <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+         style="background-image: url('https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/slide3.jpeg');">
+    </div>
+    <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+         style="background-image: url('https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/slide4.jpeg');">
+    </div>
+    <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+         style="background-image: url('https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/slide5.jpeg');">
+    </div>
   </div>
 
   <!-- 텍스트 오버레이 -->
   <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-    <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg mb-6">그린라이트와 함께<br>노원을 더 알차게 즐기자!</h1>
-    <p class="text-lg md:text-xl text-gray-200 mb-6">데이트, 친구모임, 락볼링의 모든 것!</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg mb-6">그린라이트에서<br>완전히 새로운 볼링을 경험하세요!</h1>
+    <p class="text-lg md:text-xl text-gray-200 mb-6">노원 최고의 락볼링장, 지금 예약하세요!</p>
     <a href="https://forms.gle/your-google-form" class="bg-white text-black font-bold px-6 py-3 rounded-full hover:bg-gray-200 transition">
-      지금 예약하기
+      예약하기
     </a>
   </div>
 
-  <!-- 어두운 오버레이 -->
-  <div class="absolute inset-0 bg-black/50 z-0"></div>
+  <div class="absolute inset-0 bg-black/40 z-0"></div>
 </section>
+
 
 
 
@@ -140,7 +167,7 @@
 
 
 
-<section id="home" class="pt-32 pb-20 text-center relative overflow-hidden bg-transparent">
+<section id="intro" class="pt-32 pb-20 text-center relative overflow-hidden bg-transparent">
 
   <!-- 본문 내용 -->
   <div class="relative max-w-4xl mx-auto px-4 py-20 text-black">
@@ -367,3 +394,28 @@
 <footer class="bg-white border-t border-gray-200 text-center py-6 text-sm text-gray-500">
   &copy; 2025 <span class="text-black font-semibold">그린라이트 볼링장</span> ｜ 대표 박형준 ｜ 사업자등록번호 107-10-09806
 </footer>
+
+
+<!-- ✅ 슬라이더 전환 스크립트 (1초마다, 드라마틱 효과 포함) -->
+<script>
+  const slides = document.querySelectorAll("#slider .slide");
+  let current = 0;
+  const total = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+
+  // 첫 슬라이드 보이기
+  showSlide(current);
+
+  // 2초마다 슬라이드 전환
+  setInterval(() => {
+    current = (current + 1) % total;
+    showSlide(current);
+  }, 2000); // 2초
+
+</script>

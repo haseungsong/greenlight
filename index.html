@@ -102,31 +102,49 @@
 </div>
 
 
-<header class="fixed top-0 w-full z-50 bg-gray-700 text-white shadow-lg">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
-
-    <!-- ✅ 로고 -->
+<header class="w-full fixed z-50 bg-gray-800 text-white">
+  <!-- ✅ 상단: 로고 + 메뉴 + 예약 -->
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <!-- 로고 + 텍스트 -->
     <div class="flex items-center space-x-3">
-      <img src="assets/logo.png" alt="로고" class="w-20 h-20 object-contain" />
-      <span class="text-3xl font-extrabold">그린라이트</span>
+      <img src="assets/logo.png" alt="로고" class="w-16 h-16 object-contain" />
+      <span class="text-3xl font-extrabold text-white">그린라이트</span>
     </div>
 
-    <!-- ✅ 메뉴 -->
-    <nav class="hidden md:flex space-x-12 text-2xl font-bold"> <!-- 여기가 핵심 -->
-      <a href="#home" class="hover:text-lime-400 transition">홈</a>
-      <a href="#price" class="hover:text-lime-400 transition">요금</a>
-      <a href="#menu" class="hover:text-lime-400 transition">메뉴</a>
-      <a href="#event" class="hover:text-lime-400 transition">이벤트</a>
-      <a href="#facility" class="hover:text-lime-400 transition">시설</a>
-      <a href="#location" class="hover:text-lime-400 transition">오시는길</a>
+    <!-- ✅ PC 메뉴 (md 이상에서만 보임) -->
+    <nav class="hidden md:flex space-x-12 text-3xl font-extrabold text-white">
+      <a href="#home" class="hover:text-lime-400">홈</a>
+      <a href="#price" class="hover:text-lime-400">요금</a>
+      <a href="#menu" class="hover:text-lime-400">메뉴</a>
+      <a href="#event" class="hover:text-lime-400">이벤트</a>
+      <a href="#facility" class="hover:text-lime-400">시설</a>
+      <a href="#location" class="hover:text-lime-400">오시는길</a>
+      <a href="#contact" class="hover:text-lime-400">문의</a>
     </nav>
 
-    <!-- ✅ 예약 버튼 -->
-    <a href="#booking" class="bg-lime-400 text-black px-6 py-3 rounded-full text-xl font-bold shadow hover:bg-lime-500 transition">
+    <!-- 예약하기 버튼 -->
+    <a
+      href="#booking"
+      class="bg-lime-400 text-black px-6 py-3 rounded-full text-xl font-bold shadow hover:bg-lime-500 transition"
+    >
       예약하기
     </a>
   </div>
+
+  <!-- ✅ 모바일 전용 메뉴 (PC에서는 hidden) -->
+  <nav
+    class="md:hidden w-full flex justify-around py-2 text-sm font-bold text-white border-t border-white/20 bg-gray-700"
+  >
+    <a href="#home" class="hover:text-lime-400">홈</a>
+    <a href="#price" class="hover:text-lime-400">요금</a>
+    <a href="#menu" class="hover:text-lime-400">메뉴</a>
+    <a href="#event" class="hover:text-lime-400">이벤트</a>
+    <a href="#facility" class="hover:text-lime-400">시설</a>
+    <a href="#location" class="hover:text-lime-400">오시는길</a>
+    <a href="#contact" class="hover:text-lime-400">문의</a>
+  </nav>
 </header>
+
 
 
 <!-- 🎥 슬라이더 Hero -->
@@ -162,15 +180,6 @@
 </section>
 
 
-
-
-<!-- ✅ 햄버거 메뉴 토글 스크립트 -->
-<script>
-  document.getElementById('menu-toggle').addEventListener('click', function () {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-  });
-</script>
 
 <section id="video-hero" class="relative w-full h-screen overflow-hidden">
   <div class="absolute inset-0 w-full h-full">
@@ -386,19 +395,12 @@
 
 
 <!-- 📍 오시는 길 Section -->
-<section id="location" class="scroll-mt-12 py-24 px-6 bg-white text-black"">
+<section id="location" class="scroll-mt-12 py-24 px-6 bg-white text-black">
   <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     <!-- 지도 -->
     <div>
       <h3 class="text-3xl font-bold mb-4">📍 오시는 길</h3>
-      <iframe
-        src="https://map.kakao.com/link/map/그린라이트볼링장,37.654997,127.061381"
-        width="100%"
-        height="300"
-        class="rounded-xl border border-gray-300 shadow"
-        loading="lazy"
-        allowfullscreen=""
-      ></iframe>
+      <div id="map" class="rounded-xl border border-gray-300 shadow" style="width: 100%; height: 300px;"></div>
     </div>
     <!-- 주소/영업시간 -->
     <div class="flex flex-col justify-center space-y-4 text-base">
@@ -408,6 +410,27 @@
     </div>
   </div>
 </section>
+
+<!-- ✅ 지도 API 스크립트 (body 하단에 추가) -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=당신의_앱키&autoload=false"></script>
+<script>
+  kakao.maps.load(function() {
+    const container = document.getElementById('map');
+    const options = {
+      center: new kakao.maps.LatLng(37.654997, 127.061381),
+      level: 3
+    };
+    const map = new kakao.maps.Map(container, options);
+
+    // 마커
+    const markerPosition  = new kakao.maps.LatLng(37.654997, 127.061381);
+    const marker = new kakao.maps.Marker({
+      position: markerPosition
+    });
+    marker.setMap(map);
+  });
+</script>
+
 
 
 <!-- 📞 문의 Section -->

@@ -154,22 +154,27 @@
   });
 </script>
 
-<!-- 🎥 Fullscreen 비디오 Hero -->
+<!-- 🎥 Fullscreen 비디오 Hero (YouTube 버전) -->
 <section id="video-hero" class="relative h-screen w-full overflow-hidden">
-  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
-    <source src="https://your-domain.com/your-video.mp4" type="video/mp4" />
-    <!-- Fallback -->
-    브라우저가 비디오 태그를 지원하지 않습니다.
-  </video>
+  <!-- ✅ YouTube iframe -->
+  <iframe
+    width="100%"
+    height="100%"
+    src="https://www.youtube.com/embed/g7wM9R1-PMs?autoplay=1&mute=1&loop=1&playlist=g7wM9R1-PMs&controls=0&rel=0&modestbranding=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+    class="absolute inset-0 w-full h-full object-cover"
+  ></iframe>
 
-  <!-- 텍스트/로고 오버레이 (선택) -->
+  <!-- 텍스트/로고 오버레이 -->
   <div class="relative z-10 flex items-center justify-center h-full text-white text-center px-4">
     <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-xl">
       🎳 GREENLIGHT
     </h1>
   </div>
 
-  <!-- 어두운 오버레이 (선택) -->
+  <!-- 어두운 오버레이 -->
   <div class="absolute inset-0 bg-black/40 z-0"></div>
 </section>
 

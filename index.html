@@ -154,20 +154,19 @@
   });
 </script>
 
-<!-- 🎥 Fullscreen 비디오 Hero (YouTube 버전) -->
-<section id="video-hero" class="relative h-screen w-full overflow-hidden">
-  <!-- ✅ YouTube iframe -->
-  <iframe
-    width="100%"
-    height="100%"
-    src="https://www.youtube.com/embed/g7wM9R1-PMs?autoplay=1&mute=1&loop=1&playlist=g7wM9R1-PMs&controls=0&rel=0&modestbranding=1"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
-    class="absolute inset-0 w-full h-full object-cover"
-  ></iframe>
+<section id="video-hero" class="relative w-full h-screen overflow-hidden">
+  <div class="absolute inset-0 w-full h-full">
+    <iframe
+      src="https://www.youtube.com/embed/g7wM9R1-PMs?autoplay=1&mute=1&loop=1&playlist=g7wM9R1-PMs&controls=0&rel=0&modestbranding=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      class="absolute top-0 left-0 w-[160vw] h-[120vh] -translate-x-[30vw] -translate-y-[10vh] scale-110"
+      style="pointer-events: none;"
+    ></iframe>
+  </div>
 
-  <!-- 텍스트/로고 오버레이 -->
+  <!-- 텍스트 오버레이 -->
   <div class="relative z-10 flex items-center justify-center h-full text-white text-center px-4">
     <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-xl">
       🎳 GREENLIGHT
@@ -177,6 +176,7 @@
   <!-- 어두운 오버레이 -->
   <div class="absolute inset-0 bg-black/40 z-0"></div>
 </section>
+
 
 
 
@@ -448,5 +448,9 @@
       document.getElementById('event-banner').classList.add('hidden');
     }
   });
+
+    window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
 
 </script>

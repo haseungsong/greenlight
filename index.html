@@ -77,6 +77,22 @@
     animation: fade-bounce-in-up 1.8s ease-out forwards;
   }
 
+  .event-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .event-slide.active {
+    opacity: 1;
+    z-index: 10;
+  }
+
+
   @media (max-width: 768px) {
     section#video-hero {
       height: 100vh !important;
@@ -145,9 +161,9 @@
 
     <!-- 이미지 슬라이더 -->
     <div class="relative w-full h-[400px]">
-      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event1.jpeg?raw=true" class="event-slide ..." />
-      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event2.jpeg?raw=true" class="event-slide ..." />
-      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event3.jpeg?raw=true" class="event-slide ..." />
+      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event1.jpeg?raw=true" class="event-slide" />
+      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event2.jpeg?raw=true" class="event-slide" />
+      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event3.jpeg?raw=true" class="event-slide" />
 
     </div>
 
@@ -573,13 +589,13 @@
 
 <script>
   
-    // 🎁 이벤트 배너 숨기기 로직
-    const saved = localStorage.getItem('hideEventBannerUntil');
-    const now = new Date().getTime();
-    if (saved && now < parseInt(saved)) {
-      const banner = document.getElementById('event-banner');
-      if (banner) banner.classList.add('hidden');
-    }
+    // // 🎁 이벤트 배너 숨기기 로직
+    // const saved = localStorage.getItem('hideEventBannerUntil');
+    // const now = new Date().getTime();
+    // if (saved && now < parseInt(saved)) {
+    //   const banner = document.getElementById('event-banner');
+    //   if (banner) banner.classList.add('hidden');
+    // }
 
     // 💫 페이지 리로드 시 스크롤 맨 위로
     window.onbeforeunload = function () {
@@ -594,4 +610,29 @@
   //   const banner = document.getElementById('event-banner');
   //   if (banner) banner.classList.add('hidden');
   // }
+
+
+   document.addEventListener("DOMContentLoaded", () => {
+    const eventSlides = document.querySelectorAll(".event-slide");
+    let currentEvent = 0;
+    const totalEventSlides = eventSlides.length;
+
+    function showEventSlide(index) {
+      eventSlides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+
+    // 초기 상태
+    showEventSlide(currentEvent);
+
+    // 3초마다 슬라이드 변경
+    setInterval(() => {
+      currentEvent = (currentEvent + 1) % totalEventSlides;
+      showEventSlide(currentEvent);
+    }, 3000);
+  });
 </script>

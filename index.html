@@ -156,8 +156,9 @@
   <div class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-[95%] overflow-hidden">
 
     <!-- 닫기 버튼 -->
-    <button onclick="document.getElementById('event-banner').classList.add('hidden')" 
-            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-bold z-20">&times;</button>
+    <button onclick="closeBannerAndPlayVideo()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-bold z-20">&times;</button>
+
 
     <!-- 이미지 슬라이더 -->
     <div class="relative w-full h-[400px]">
@@ -602,15 +603,45 @@
       window.scrollTo(0, 0);
     };
 
-  // // 🎁 배너 오늘 하루 숨기기 함수 (클릭 시 호출됨)
-  // function hideBannerToday() {
-  //   const now = new Date();
-  //   const expire = now.setHours(23, 59, 59, 999); // 오늘 밤 11:59:59까지 유효
-  //   localStorage.setItem('hideEventBannerUntil', expire);
-  //   const banner = document.getElementById('event-banner');
-  //   if (banner) banner.classList.add('hidden');
-  // }
+    // // 🎁 배너 오늘 하루 숨기기 함수 (클릭 시 호출됨)
+    // function hideBannerToday() {
+    //   const now = new Date();
+    //   const expire = now.setHours(23, 59, 59, 999);
+    //   localStorage.setItem('hideEventBannerUntil', expire);
 
+    //   const banner = document.getElementById('event-banner');
+    //   if (banner) banner.classList.add('hidden');
+
+    //   // 영상 재생 시도
+    //   const video = document.querySelector('section#video-hero video');
+    //   if (video) {
+    //     const promise = video.play();
+    //     if (promise !== undefined) {
+    //       promise.catch((e) => console.warn('Video 재생 실패:', e));
+    //     }
+    //   }
+    // }
+
+
+    function closeBannerAndPlayVideo() {
+        const banner = document.getElementById('event-banner');
+        if (banner) banner.classList.add('hidden');
+
+        // 🎥 영상 재생 시도
+        const video = document.querySelector('section#video-hero video');
+        if (video) {
+          const promise = video.play();
+          if (promise !== undefined) {
+            promise
+              .then(() => {
+                console.log('🎬 Video playback started');
+              })
+              .catch((error) => {
+                console.warn('⚠️ Video playback failed:', error);
+              });
+          }
+        }
+      }
 
    document.addEventListener("DOMContentLoaded", () => {
     const eventSlides = document.querySelectorAll(".event-slide");

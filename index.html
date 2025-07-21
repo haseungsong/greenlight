@@ -586,12 +586,12 @@
       window.scrollTo(0, 0);
     };
 
-  // 🎁 배너 오늘 하루 숨기기 함수 (클릭 시 호출됨)
-  function hideBannerToday() {
-    const now = new Date();
-    const expire = now.setHours(23, 59, 59, 999); // 오늘 밤 11:59:59까지 유효
-    localStorage.setItem('hideEventBannerUntil', expire);
-    const banner = document.getElementById('event-banner');
-    if (banner) banner.classList.add('hidden');
-  }
+  // // 🎁 배너 오늘 하루 숨기기 함수 (클릭 시 호출됨)
+  // function hideBannerToday() {
+  //   const now = new Date();
+  //   const expire = now.setHours(23, 59, 59, 999); // 오늘 밤 11:59:59까지 유효
+  //   localStorage.setItem('hideEventBannerUntil', expire);
+  //   const banner = document.getElementById('event-banner');
+  //   if (banner) banner.classList.add('hidden');
+  // }
 </script>

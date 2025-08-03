@@ -93,6 +93,12 @@
     z-index: 10;
   }
 
+  /* 추가된 부분: 이미지 로딩 강제화 */
+  #event-banner .event-slide {
+    width: 100%;
+    height: 400px; /* 명시적 높이 */
+    display: block;
+  }
 
   @media (max-width: 768px) {
     section#video-hero {
@@ -143,6 +149,8 @@
     display: none !important;
   }
 
+
+
 </style>
 
 
@@ -163,9 +171,10 @@
 
     <!-- 이미지 슬라이더 -->
     <div class="relative w-full h-[400px]">
-      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event1.png?raw=true" class="event-slide" />
+      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event1.png?raw=true" class="event-slide active" /> <!-- ✅ active 추가 -->
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event2.png?raw=true" class="event-slide" />
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event3.png?raw=true" class="event-slide" />
+      <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event4.png?raw=true" class="event-slide" />
 
     </div>
 

@@ -79,18 +79,15 @@
   }
 
   .event-slide {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    height: auto;
+    object-fit: contain;
+    display: none;
   }
 
   .event-slide.active {
+    display: block;
     opacity: 1;
-    z-index: 10;
   }
 
   /* ✅ PC/모바일에 따라 이미지 fit 다르게 설정 */
@@ -106,6 +103,11 @@
       object-fit: contain;   /* 이미지 전체 보이게 */
       height: auto;          /* 높이 제한 제거 */
       background-color: white; /* 남는 공간 배경색 */
+    }
+    
+    /* 부모 컨테이너 높이도 유동적으로 */
+    #event-banner .relative.w-full {
+      height: auto !important;
     }
   }
 
@@ -179,7 +181,7 @@
 
 
     <!-- 이미지 슬라이더 -->
-    <div class="relative w-full h-[400px]">
+    <div class="relative w-full">
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event1.png?raw=true" class="event-slide active" /> <!-- ✅ active 추가 -->
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event2.png?raw=true" class="event-slide" />
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event3.png?raw=true" class="event-slide" />

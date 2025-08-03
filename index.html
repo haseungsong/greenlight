@@ -543,25 +543,96 @@
   </div>
 </section>
 
-<!-- ✅ 지도 API 스크립트 (body 하단에 추가) -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=당신의_앱키&autoload=false"></script>
+<!-- ✅ 네이버 지도 API -->
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=55x92ndw9o"></script>
 <script>
-  kakao.maps.load(function() {
-    const container = document.getElementById('map');
-    const options = {
-      center: new kakao.maps.LatLng(37.654997, 127.061381),
-      level: 3
-    };
-    const map = new kakao.maps.Map(container, options);
+  document.addEventListener("DOMContentLoaded", () => {
+    const bowlingLat = 37.654997;
+    const bowlingLng = 127.061381;
+    const bowlingPos = new naver.maps.LatLng(bowlingLat, bowlingLng);
 
-    // 마커
-    const markerPosition  = new kakao.maps.LatLng(37.654997, 127.061381);
-    const marker = new kakao.maps.Marker({
-      position: markerPosition
+    const map = new naver.maps.Map("map", {
+      center: bowlingPos,
+      zoom: 16
     });
-    marker.setMap(map);
+
+    // 🎯 마커 및 기본 인포윈도우
+    const marker = new naver.maps.Marker({
+      position: bowlingPos,
+      map: map
+    });
+
+    const info = new naver.maps.InfoWindow({
+      content: `<div style="padding:10px; font-weight:bold;">🎳 그린라이트 볼링장</div>`
+    });
+    info.open(map, marker);
+
+    // 📍 사용자 현재 위치
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+        const userPos = new naver.maps.LatLng(userLat, userLng);
+
+        // 🧭 사용자 위치 마커
+        new naver.maps.Marker({
+          position: userPos,
+          map: map,
+          icon: {
+            content: `<div style="background:#10b981;color:white;padding:4px 6px;border-radius:4px;font-size:12px;">내 위치</div>`,
+            anchor: new naver.maps.Point(12, 12)
+          }
+        });
+
+        // 지도 중심 사용자 위치로 이동
+        map.setCenter(userPos);
+
+        // 두 경로 호출 (차량 + 도보)
+        Promise.all([
+          fetch(`https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving?start=${userLng},${userLat}&goal=${bowlingLng},${bowlingLat}`, {
+            method: "GET",
+            headers: {
+              "X-NCP-APIGW-API-KEY-ID": "55x92ndw9o",
+              "X-NCP-APIGW-API-KEY": "sP9x8yHKRSOS1O20ENYT0Ideiaqybb78Oo6k20uZ"
+            }
+          }).then(res => res.json()),
+          fetch(`https://naveropenapi.apigw.ntruss.com/map-direction/v1/pedestrian?start=${userLng},${userLat}&goal=${bowlingLng},${bowlingLat}`, {
+            method: "GET",
+            headers: {
+              "X-NCP-APIGW-API-KEY-ID": "55x92ndw9o",
+              "X-NCP-APIGW-API-KEY": "sP9x8yHKRSOS1O20ENYT0Ideiaqybb78Oo6k20uZ"
+            }
+          }).then(res => res.json())
+        ])
+        .then(([drivingData, walkData]) => {
+          const d = drivingData.route?.traoptimal?.[0]?.summary;
+          const w = walkData.route?.paths?.[0]?.summary;
+
+          let html = `<div style="padding:10px; font-size:13px;">
+            <div style="font-weight:bold; margin-bottom:5px;">🎳 그린라이트 볼링장</div>`;
+
+          if (d) {
+            html += `<div>🚗 차량: ${ (d.distance / 1000).toFixed(1) }km / 약 ${ Math.ceil(d.duration / 60000) }분</div>`;
+          }
+          if (w) {
+            html += `<div>🚶 도보: ${ (w.distance / 1000).toFixed(1) }km / 약 ${ Math.ceil(w.duration / 60000) }분</div>`;
+          }
+
+          html += `</div>`;
+          info.setContent(html);
+          info.open(map, marker);
+        })
+        .catch(error => console.error("경로 요청 실패:", error));
+      }, () => {
+        console.warn("위치 권한 거부됨");
+      });
+    } else {
+      console.warn("이 브라우저는 위치 정보를 지원하지 않습니다.");
+    }
   });
 </script>
+
+
 
 
 

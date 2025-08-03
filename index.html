@@ -186,7 +186,15 @@
       <img src="https://raw.githubusercontent.com/haseungsong/greenlight/main/assets/event4.png?raw=true" class="event-slide" />
 
     </div>
+    
 
+    <!-- 🔘 슬라이드 인디케이터 -->
+    <div id="event-indicators" class="flex justify-center items-center space-x-2 py-3">
+      <div class="w-2 h-2 rounded-full bg-gray-400 opacity-50 transition-all duration-300"></div>
+      <div class="w-2 h-2 rounded-full bg-gray-400 opacity-50 transition-all duration-300"></div>
+      <div class="w-2 h-2 rounded-full bg-gray-400 opacity-50 transition-all duration-300"></div>
+      <div class="w-2 h-2 rounded-full bg-gray-400 opacity-50 transition-all duration-300"></div>
+    </div>
 
     <!-- 오늘 다시 보지 않기 -->
     <div class="bg-white py-4 px-6 flex justify-end">
@@ -719,14 +727,22 @@
 
    document.addEventListener("DOMContentLoaded", () => {
     const eventSlides = document.querySelectorAll(".event-slide");
+    const indicators = document.querySelectorAll("#event-indicators div");
     let currentEvent = 0;
     const totalEventSlides = eventSlides.length;
 
     function showEventSlide(index) {
       eventSlides.forEach((slide, i) => {
         slide.classList.remove("active");
+        if (i === index) slide.classList.add("active");
+      });
+
+      indicators.forEach((dot, i) => {
+        dot.classList.remove("bg-primary", "opacity-100");
+        dot.classList.add("bg-gray-400", "opacity-50");
         if (i === index) {
-          slide.classList.add("active");
+          dot.classList.remove("bg-gray-400", "opacity-50");
+          dot.classList.add("bg-primary", "opacity-100");
         }
       });
     }
@@ -740,4 +756,5 @@
       showEventSlide(currentEvent);
     }, 3000);
   });
+
 </script>

@@ -93,11 +93,20 @@
     z-index: 10;
   }
 
-  /* 추가된 부분: 이미지 로딩 강제화 */
-  #event-banner .event-slide {
-    width: 100%;
-    height: 400px; /* 명시적 높이 */
-    display: block;
+  /* ✅ PC/모바일에 따라 이미지 fit 다르게 설정 */
+  @media (max-width: 768px) {
+    .event-slide {
+      object-fit: cover;
+      height: 400px; /* 모바일은 고정 높이 유지 */
+    }
+  }
+
+  @media (min-width: 769px) {
+    .event-slide {
+      object-fit: contain;   /* 이미지 전체 보이게 */
+      height: auto;          /* 높이 제한 제거 */
+      background-color: white; /* 남는 공간 배경색 */
+    }
   }
 
   @media (max-width: 768px) {
